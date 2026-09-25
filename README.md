@@ -4,7 +4,7 @@ Personal lecture notes for a 10-week Web Technologies 1 (Frontend) course. Writt
 
 ## 👤 Author
 
-**Dossymzhan** — student at Astana IT University.
+**Dossymzhan Sansyzbay** — student at Astana IT University.
 
 ## 📚 Topics
 
@@ -27,7 +27,7 @@ Practice/lab sessions follow the official course plan (basic HTML pages, forms &
 
 ## 🧠 Quizzes
 
-Self-graded HTML quizzes for each completed week, in [`quizzes/`](quizzes/index.html). Open `quizzes/index.html` directly in a browser, or enable GitHub Pages to access them online at `your-username.github.io/your-repo-name/quizzes/`.
+Self-graded HTML quizzes for each completed week, in [`quizzes/`](quizzes/index.html). Open `quizzes/index.html` directly in a browser, or enable GitHub Pages to access them online at `dosiks2028.github.io/Web-Technologies-1/quizzes/`.
 
 ## ⚙️ Compiling
 
