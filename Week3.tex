@@ -1,0 +1,222 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\geometry{margin=1in}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{teal}
+}
+
+\title{Web Technologies 1 (Frontend) \\ Week 3: CSS Fundamentals}
+\author{Dossymzhan}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+Week 3 introduces CSS: what it is, how to add it to a page, selectors and specificity, colors, fonts, the box model, positioning, floats, interactive states, and basic CSS tooling/validation.
+
+\section{1. What is CSS?}
+CSS (Cascading Style Sheets) is the language used to style a web page.
+\begin{itemize}
+    \item CSS describes how HTML elements are displayed on screen, paper, or other media.
+    \item CSS saves work: it can control the layout of multiple pages at once.
+\end{itemize}
+\begin{lstlisting}
+p { color: red; font-size: 10px; }
+/* selector { property: value; property: value; } */
+\end{lstlisting}
+
+\section{2. How to Add CSS}
+There are three ways to insert a style sheet:
+\begin{itemize}
+    \item \textbf{Inline CSS} — the \texttt{style} attribute on an HTML element:
+    \begin{lstlisting}[language=HTML]
+<p style="color:blue;">Blue text</p>
+    \end{lstlisting}
+    \item \textbf{Internal CSS} — a \texttt{<style>} element inside \texttt{<head>}:
+    \begin{lstlisting}[language=HTML]
+<style> p { color: blue; } </style>
+    \end{lstlisting}
+    \item \textbf{External CSS} — a link to an external \texttt{.css} file (lets the same styles be reused across multiple pages):
+    \begin{lstlisting}[language=HTML]
+<link rel="stylesheet" href="style.css">
+    \end{lstlisting}
+\end{itemize}
+
+\section{3. CSS Selectors}
+Selectors tell CSS which HTML elements to style; the declarations inside \texttt{\{ \}} are then applied to them.
+
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Selector} & \textbf{Syntax} & \textbf{Selects} \\
+\hline
+Element & \texttt{p} & all \texttt{<p>} elements \\
+Class & \texttt{.card} & elements with \texttt{class="card"} \\
+ID & \texttt{\#title} & one element with \texttt{id="title"} \\
+\end{tabular}
+\end{center}
+Classes can be reused on multiple elements; IDs should be unique on the page.
+
+\section{4. Selector Priority (Specificity)}
+When multiple selectors target the same element, the more specific one wins:
+$$\text{Element} < \text{Class} < \text{ID}$$
+ID is the most specific (highest priority); an element selector (e.g. \texttt{p}, \texttt{h1}, \texttt{div}) is the least specific.
+
+\subsection{Cascade and Inheritance}
+\begin{itemize}
+    \item The \emph{cascade} resolves declarations that target the same element.
+    \item Specificity compares the \emph{complete} selector, not just its type.
+    \item If specificity is equal, the \emph{later} declaration wins.
+    \item Color and font properties usually inherit from parent to child; margin and border do not.
+\end{itemize}
+\begin{lstlisting}
+.card p    { color: navy; }
+.card .note { color: crimson; }
+/* a <p class="note"> inside .card becomes crimson
+   because the second selector is more specific   */
+\end{lstlisting}
+
+\subsection{Selector Example}
+\begin{lstlisting}[language=HTML]
+<h2 id="title">Menu</h2>
+<p>Coffee</p>
+<p class="off">Tea</p>
+<p class="off">Cake</p>
+\end{lstlisting}
+\begin{lstlisting}
+p { color: brown; }
+.off {
+  background: gray;
+  color: black;
+}
+#title { text-align: center; }
+\end{lstlisting}
+Result: "Coffee" is brown; "Tea" and "Cake" have a gray background and black text (the more specific \texttt{.off} class overrides the element rule); "Menu" is centered.
+
+\section{5. Colors in CSS}
+CSS supports several color formats:
+\begin{itemize}
+    \item \textbf{Named colors:} \texttt{red}, \texttt{blue}, \texttt{green}
+    \item \textbf{HEX:} \texttt{\#ff0000}
+    \item \textbf{RGB / RGBA:} \texttt{rgb(255, 0, 0)}, \texttt{rgba(255, 0, 0, 0.5)}
+    \item \textbf{HSL:} \texttt{hsl(0, 100\%, 50\%)}
+\end{itemize}
+\begin{lstlisting}
+h1 { color: tomato; }              /* text color */
+h1 { background-color: gray; }     /* background color */
+h1 { border: 2px solid red; }      /* border color */
+\end{lstlisting}
+
+\section{6. Fonts in CSS}
+\begin{itemize}
+    \item \texttt{font-family} — the font (Arial, serif, sans-serif, monospace, custom Google Fonts).
+    \item \texttt{font-size} — text size (\texttt{px}, \texttt{em}, \texttt{rem}).
+    \item \texttt{font-weight} — thickness (\texttt{normal}, \texttt{bold}, \texttt{lighter}).
+    \item \texttt{font-style} — \texttt{normal} or \texttt{italic}.
+    \item \texttt{text-align} — \texttt{left}, \texttt{right}, \texttt{center}, \texttt{justify}.
+\end{itemize}
+\begin{lstlisting}
+p {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+\end{lstlisting}
+
+\section{7. Spacing and the Box Model}
+Every HTML element is a box with four layers, from inside out:
+\begin{itemize}
+    \item \textbf{content} — text or other content.
+    \item \textbf{padding} — space inside the element (between content and border).
+    \item \textbf{border} — outline around the element.
+    \item \textbf{margin} — space outside the element.
+\end{itemize}
+\begin{lstlisting}
+div {
+  padding: 20px;
+  border: 1px solid black;
+  margin: 15px;
+}
+\end{lstlisting}
+
+\section{8. Positioning and Alignment}
+The \texttt{position} property controls how an element is positioned:
+\begin{itemize}
+    \item \texttt{static} — default position (normal document flow).
+    \item \texttt{relative} — moved relative to its normal position.
+    \item \texttt{absolute} — moved relative to the nearest positioned ancestor.
+    \item \texttt{fixed} — stays in the same place relative to the viewport (doesn't scroll away).
+\end{itemize}
+\texttt{text-align} sets the horizontal alignment of text (\texttt{left}, \texttt{center}, \texttt{right}, \texttt{justify}).
+
+\section{9. Float and Clear}
+\texttt{float} removes an element from the normal flow and lets content wrap around it.
+\begin{itemize}
+    \item \texttt{float}: \texttt{left}, \texttt{right}, \texttt{none}.
+    \item \texttt{width} is commonly used with floated elements to control their size; floated elements can sit side by side.
+\end{itemize}
+\texttt{clear} prevents an element from appearing beside floated content (\texttt{left}, \texttt{right}, \texttt{both}, \texttt{none}); \texttt{clear: both} places the element below floats on both sides.
+\begin{lstlisting}
+.box {
+  float: left;
+  width: 33.33%;
+  box-sizing: border-box;
+}
+\end{lstlisting}
+
+\section{10. Interactive States}
+\begin{itemize}
+    \item \texttt{:hover} — applies while the pointer is over an element.
+    \item \texttt{:focus} — applies when a link or form control receives keyboard focus. A visible focus indicator helps keyboard users track their position.
+\end{itemize}
+\begin{lstlisting}
+nav a:hover { color: crimson; }
+input:focus {
+  outline: 3px solid #2457D6;
+  outline-offset: 2px;
+}
+\end{lstlisting}
+
+\section{11. CSS Features}
+\subsection{Favicons}
+A favicon is a small icon shown in the browser tab next to the page title; usually \texttt{.png}, \texttt{.ico}, or \texttt{.svg}, commonly $16\times16$ or $32\times32$ px.
+\begin{lstlisting}[language=HTML]
+<link rel="icon" href="favicon.png">
+\end{lstlisting}
+
+\subsection{Sizing Units}
+\begin{itemize}
+    \item \texttt{px} — fixed size.
+    \item \texttt{\%} — relative to the parent element.
+    \item \texttt{em} — relative to the parent element's font size.
+    \item \texttt{rem} — relative to the root element's font size.
+\end{itemize}
+
+\section{12. CSS Validation and DevTools}
+\begin{itemize}
+    \item Inspect applied and overridden declarations in the \emph{Styles} panel.
+    \item Use \emph{Computed} to check final values and the box model.
+    \item Test several viewport widths for responsiveness.
+    \item Use keyboard navigation to check focus states.
+    \item Run the W3C CSS Validator (\href{https://jigsaw.w3.org/css-validator/}{jigsaw.w3.org/css-validator}) and fix every error.
+\end{itemize}
+
+\section{Summary}
+Week 3 covers CSS fundamentals: three ways to add styles, element/class/ID selectors and specificity, the cascade and inheritance, colors, fonts, the box model (content/padding/border/margin), positioning (static/relative/absolute/fixed), float/clear, hover/focus states, favicons, sizing units, and CSS validation via DevTools/W3C validator.
+
+\end{document}

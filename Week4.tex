@@ -1,0 +1,273 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\geometry{margin=1in}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{teal}
+}
+
+\title{Web Technologies 1 (Frontend) \\ Week 4: CSS Layouts — Flexbox \& Grid}
+\author{Dossymzhan}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+Week 4 covers the \texttt{display} property, the difference between hiding elements, the two main modern layout systems — Flexbox (1D) and Grid (2D) — their terminology, key properties, and how to combine them.
+
+\section{1. The \texttt{display} Property}
+\texttt{display} controls how an element is shown on the page and how it interacts with its neighbors.
+\begin{itemize}
+    \item Default display: \texttt{block} or \texttt{inline}.
+    \item The default can be changed, e.g. \texttt{display: inline} on \texttt{<li>} for a horizontal menu.
+    \item Flexbox and Grid are turned on via \texttt{display: flex} and \texttt{display: grid}.
+\end{itemize}
+\textbf{Block-level elements:} start on a new line, take full width. Examples: \texttt{<div>}, \texttt{<h1>}–\texttt{<h6>}, \texttt{<p>}, \texttt{<form>}, \texttt{<header>}, \texttt{<footer>}, \texttt{<section>}.
+
+\textbf{Inline elements:} stay in the same line, take only the needed width. Examples: \texttt{<span>}, \texttt{<a>}, \texttt{<img>}.
+
+\section{2. \texttt{display: none} vs \texttt{visibility: hidden}}
+\begin{itemize}
+    \item \texttt{display: none} — element is removed; it takes up no space.
+    \item \texttt{visibility: hidden} — element is hidden but its space is kept in the layout.
+\end{itemize}
+
+\section{3. Flexbox}
+The CSS Flexible Box Layout Module (Flexbox) is a \textbf{one-dimensional} layout method for arranging items in a row or a column, without floats or manual positioning. Items grow to fill free space or shrink to fit the container.
+
+With Flexbox you can:
+\begin{itemize}
+    \item center content horizontally and vertically;
+    \item distribute space evenly between items;
+    \item make columns the same height regardless of content;
+    \item change the order/direction of items without editing the HTML.
+\end{itemize}
+
+\subsection{Flexbox Terminology}
+\begin{itemize}
+    \item \textbf{Flex container} — the parent with \texttt{display: flex}.
+    \item \textbf{Flex items} — the direct children inside the container.
+    \item \textbf{Main axis} — the primary axis along which flex items are laid out.
+    \item \textbf{Cross axis} — perpendicular to the main axis.
+    \item \textbf{main-start / main-end} — the starting/ending edges of the main axis.
+    \item \textbf{main size} — total size of flex items along the main axis (width if row, height if column).
+    \item \textbf{cross-start / cross-end} — starting/ending edges of the cross axis.
+    \item \textbf{cross size} — total size of flex items along the cross axis.
+\end{itemize}
+
+\subsection{Key Flexbox Properties — Container}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Property} & \textbf{Description} \\
+\hline
+\texttt{display} & Defines a flex container: \texttt{flex} or \texttt{inline-flex} \\
+\texttt{flex-direction} & Main axis: \texttt{row}, \texttt{row-reverse}, \texttt{column}, \texttt{column-reverse} \\
+\texttt{flex-wrap} & Wrapping: \texttt{nowrap}, \texttt{wrap}, \texttt{wrap-reverse} \\
+\texttt{flex-flow} & Shorthand for \texttt{flex-direction} + \texttt{flex-wrap} \\
+\texttt{justify-content} & Aligns items on the main axis (horizontally by default) \\
+\texttt{align-items} & Aligns items on the cross axis (vertically by default) \\
+\texttt{align-content} & Aligns flex lines when items wrap \\
+\end{tabular}
+\end{center}
+
+\subsection{Key Flexbox Properties — Items}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Property} & \textbf{Description} \\
+\hline
+\texttt{order} & Order in which items appear (default 0) \\
+\texttt{flex-grow} & How much an item can grow relative to others (default 0) \\
+\texttt{flex-shrink} & How much an item can shrink relative to others (default 1) \\
+\texttt{flex-basis} & Initial size before growth/shrink (default \texttt{auto}) \\
+\texttt{flex} & Shorthand for \texttt{flex-grow}, \texttt{flex-shrink}, \texttt{flex-basis} \\
+\texttt{align-self} & Overrides \texttt{align-items} for a single item \\
+\end{tabular}
+\end{center}
+
+\subsection{\texttt{flex-direction} and \texttt{justify-content}}
+\begin{lstlisting}
+.flex-container {
+  display: flex;
+  flex-direction: column; /* row (default) | row-reverse | column | column-reverse */
+}
+\end{lstlisting}
+\texttt{justify-content} values: \texttt{flex-start} (default), \texttt{center}, \texttt{flex-end}, \texttt{space-between}, \texttt{space-around}, \texttt{space-evenly}.
+
+\subsection{Flexbox Examples}
+\begin{itemize}
+    \item \textbf{Equal share:} \texttt{flex: 1} on every item — each takes an equal share of available space.
+    \item \textbf{Auto margins:} \texttt{margin-left: auto;} pushes an item to the edge (e.g., a "Log in / Sign up" block pushed right in a navbar).
+    \item \textbf{Column layouts:} \texttt{flex-direction: column;} stacks items vertically (e.g., a card with the button pinned to the bottom via \texttt{margin-top: auto;}).
+    \item \textbf{Non-shrinking items:} \texttt{flex-shrink: 0;} keeps an item (e.g., an avatar) at a fixed size while sibling text wraps.
+    \item \textbf{Wrapping:} \texttt{flex-wrap: wrap;} moves overflowing items to the next line.
+    \item \textbf{Stretch alignment:} \texttt{align-items: stretch;} equalizes item heights.
+\end{itemize}
+\begin{lstlisting}
+.card { flex-direction: column; }
+.card .btn { margin-top: auto; }
+.avatar { flex-shrink: 0; }
+.buttons { margin-left: auto; }
+\end{lstlisting}
+
+\section{4. Grid Layout}
+CSS Grid Layout is a \textbf{two-dimensional} grid-based system with rows \emph{and} columns, making it easier to build complex layouts without floats or positioning.
+
+With CSS Grid you can:
+\begin{itemize}
+    \item define fixed, flexible, or proportional track sizes (\texttt{fr}, \texttt{auto}, \texttt{\%});
+    \item place items into specific cells or span them across multiple rows/columns, regardless of source order;
+    \item build complex layouts (dashboards, galleries, page templates) with consistent alignment.
+\end{itemize}
+
+\subsection{Grid Terminology}
+\begin{itemize}
+    \item \textbf{Grid Container} — parent with \texttt{display: grid}.
+    \item \textbf{Grid Items} — direct children inside the grid.
+    \item \textbf{Grid Track} — a row or a column.
+    \item \textbf{Grid Area} — a rectangular space spanning multiple cells.
+    \item \textbf{Grid Line} — dividing lines between cells.
+    \item \textbf{Grid Cell} — a single "unit" of the grid.
+    \item \textbf{Gap} — space between columns/rows.
+\end{itemize}
+
+\subsection{Special Units and Functions}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Unit/Function} & \textbf{Description} \\
+\hline
+\texttt{fr} & Fraction of available space in the container (e.g. \texttt{1fr 2fr}) \\
+\texttt{auto} & Size adjusts automatically to fit content \\
+\texttt{min-content} & Track shrinks to the smallest size needed \\
+\texttt{max-content} & Track expands to the largest size needed \\
+\texttt{minmax(min, max)} & Track resizes between a min and max value \\
+\texttt{fit-content(v)} & Track grows to fit content up to a maximum \\
+\texttt{repeat(n, value)} & Repeats a track definition $n$ times (e.g. \texttt{repeat(3, 1fr)}) \\
+\end{tabular}
+\end{center}
+
+\subsection{Key Grid Properties — Container}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Property} & \textbf{Description} \\
+\hline
+\texttt{grid-template-columns} & Number and width of columns \\
+\texttt{grid-template-rows} & Number and height of rows \\
+\texttt{gap} / \texttt{row-gap} / \texttt{column-gap} & Spacing between tracks \\
+\texttt{justify-items} / \texttt{align-items} & Aligns items horizontally/vertically within cells \\
+\texttt{justify-content} & Aligns the entire grid along the row axis \\
+\texttt{align-content} & Aligns the entire grid along the column axis \\
+\texttt{grid-template-areas} & Defines the layout using named areas \\
+\end{tabular}
+\end{center}
+
+\subsection{Key Grid Properties — Items}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Property} & \textbf{Description} \\
+\hline
+\texttt{grid-column} & Column(s) an item should occupy \\
+\texttt{grid-row} & Row(s) an item should occupy \\
+\texttt{grid-area} & Item position by row/column, or a named area \\
+\texttt{justify-self} & Aligns a single item horizontally in its cell \\
+\texttt{align-self} & Aligns a single item vertically in its cell \\
+\end{tabular}
+\end{center}
+
+\subsection{Spanning and Auto-fit}
+\begin{lstlisting}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+.lead {
+  grid-column: span 2; /* item takes 2 columns */
+  grid-row: span 2;    /* item takes 2 rows    */
+}
+\end{lstlisting}
+\texttt{grid-column: 1 / 4;} means "from line 1 to line 4". \texttt{repeat(auto-fit, minmax(110px, 1fr))} makes the number of columns follow the window width.
+
+\subsection{Grid Template Areas}
+\begin{lstlisting}
+.page {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-template-rows: 50px 1fr 40px;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  gap: 10px;
+}
+.header  { grid-area: header;  }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main;    }
+.footer  { grid-area: footer;  }
+\end{lstlisting}
+This names each grid area directly in the CSS layout string, giving a readable "map" of the page (header / sidebar + main / footer).
+
+\section{5. Flexbox vs Grid}
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Feature} & \textbf{Flexbox (1D)} & \textbf{Grid (2D)} \\
+\hline
+Layout direction & Row \emph{or} Column & Rows \emph{and} Columns \\
+Use case & Navbars, simple alignment & Complex page layouts \\
+Approach & Content-first & Layout-first \\
+Responsiveness & Easy with \texttt{flex-wrap} & Easy with \texttt{auto-fit}/\texttt{auto-fill} \\
+\end{tabular}
+\end{center}
+
+\subsection{When to Use Which}
+\begin{itemize}
+    \item \textbf{Use Flexbox for:} navbars, menus, buttons, form controls, one-direction layouts.
+    \item \textbf{Use Grid for:} full page layout, dashboards, galleries, complex responsive designs.
+\end{itemize}
+
+\section{6. Combining Flexbox and Grid}
+They work well together:
+\begin{itemize}
+    \item Grid for the large-scale page layout; Flexbox for aligning content inside individual grid cells.
+    \item A grid item can itself be a flex container.
+    \item A flex item can itself be a grid container.
+\end{itemize}
+\begin{lstlisting}
+/* page layout: Grid */
+.page {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-template-rows: 60px 1fr 40px;
+  gap: 10px;
+}
+
+/* inside cells: Flexbox */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main {
+  display: flex;
+  gap: 10px;
+}
+.card { flex: 1; }
+\end{lstlisting}
+
+\section{Summary}
+Week 4 covers the \texttt{display} property and how it differs from visibility, then the two modern CSS layout systems: one-dimensional \textbf{Flexbox} (container/item terminology, main/cross axis, \texttt{flex-direction}, \texttt{justify-content}, growing/shrinking items) and two-dimensional \textbf{Grid} (tracks, areas, lines, cells, \texttt{fr} units, \texttt{repeat()}/\texttt{minmax()}, \texttt{grid-template-areas}), when to use each, and how to combine them for real page layouts.
+
+\end{document}

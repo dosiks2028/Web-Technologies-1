@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\geometry{margin=1in}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{teal}
+}
+
+\title{Web Technologies 1 (Frontend) \\ Week 2: HTML Advanced}
+\author{Dossymzhan}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+Week 2 goes beyond the basic HTML skeleton: tables, forms/inputs/buttons, lists/links/images, semantic tags, \texttt{<div>} and \texttt{<span>}, and finally how to publish a site with GitHub Pages.
+
+\section{1. Tables}
+Tables organize related information into rows and columns.
+\begin{lstlisting}[language=HTML]
+<table>
+  <thead>
+    <tr><th>Subject</th><th>Day</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Web Tech 1</td><td>Monday</td></tr>
+    <tr><td>Algorithms</td><td>Tuesday</td></tr>
+  </tbody>
+  <tfoot>
+    <tr><td colspan="2">Total: 2 classes</td></tr>
+  </tfoot>
+</table>
+\end{lstlisting}
+\begin{itemize}
+    \item \texttt{<tr>} — table row
+    \item \texttt{<th>} — table header cell
+    \item \texttt{<td>} — table data cell
+    \item \texttt{colspan} lets a cell span multiple columns.
+\end{itemize}
+
+\section{2. Forms, Inputs and Buttons}
+The \texttt{<form>} element collects user input.
+\begin{lstlisting}[language=HTML]
+<form>
+  <label>Name</label>
+  <input type="text">
+
+  <label>Email</label>
+  <input type="email">
+
+  <button>Send</button>
+</form>
+\end{lstlisting}
+\begin{itemize}
+    \item An \texttt{<input>} element's appearance/behavior depends on its \texttt{type} attribute.
+    \item Common input types: \texttt{text}, \texttt{email}, \texttt{password}, \texttt{number}, \texttt{date}, \texttt{color}, \texttt{checkbox}, \texttt{radio}, \texttt{file}, \texttt{submit}.
+    \item \texttt{<label>} defines a caption for a form control (improves accessibility and click targets).
+\end{itemize}
+
+\section{3. Lists, Links and Images}
+\begin{lstlisting}[language=HTML]
+<ol> <!-- ordered list -->
+  <li>Football</li>
+  <li>Chess</li>
+</ol>
+
+<ul> <!-- unordered list -->
+  <li>
+    <a href="https://example.com">Visit my website</a>
+  </li>
+</ul>
+
+<img src="https://example.com/img.png" alt="Image">
+\end{lstlisting}
+\begin{itemize}
+    \item \texttt{<ol>} — ordered (numbered) list; \texttt{<ul>} — unordered (bulleted) list; \texttt{<li>} — list item.
+    \item \texttt{<a href="...">} creates a hyperlink.
+    \item \texttt{<img src="..." alt="...">} embeds an image; \texttt{alt} provides fallback/accessible text.
+\end{itemize}
+
+\section{4. Semantic Tags}
+\begin{itemize}
+    \item \textbf{Non-semantic elements} (\texttt{<div>}, \texttt{<span>}) tell nothing about their content.
+    \item \textbf{Semantic elements} (\texttt{<header>}, \texttt{<nav>}, \texttt{<main>}, \texttt{<section>}, \texttt{<article>}, \texttt{<aside>}, \texttt{<footer>}) clearly describe their meaning to both the browser and the developer.
+\end{itemize}
+\begin{itemize}
+    \item \texttt{<header>} — top of the page: logo, title.
+    \item \texttt{<nav>} — navigation links.
+    \item \texttt{<main>} — the unique content of the page.
+    \item \texttt{<section>} — a thematic block with a heading.
+    \item \texttt{<article>} — a self-contained piece: a post, a card.
+    \item \texttt{<aside>} — side content: menu, related links.
+    \item \texttt{<footer>} — contacts, copyright.
+\end{itemize}
+
+\section{5. \texttt{<div>} and \texttt{<span>}}
+\begin{itemize}
+    \item \textbf{\texttt{<div>}} — a block container: takes the full width available, always starts on a new line, groups elements so CSS can style them together.
+    \item \textbf{\texttt{<span>}} — an inline container: takes only the width it needs, stays inside the line of text, used to style a few words inside a paragraph.
+\end{itemize}
+\begin{lstlisting}[language=HTML]
+<div class="card"> ... </div>
+
+<p>today is <span class="hot">98</span></p>
+\end{lstlisting}
+
+\section{6. Publishing with GitHub Pages}
+\begin{enumerate}
+    \item Register on GitHub (\url{https://github.com/}).
+    \item Create a new repository.
+    \item Upload website files — the project's main HTML file must be named \texttt{index.html}.
+    \item Enable GitHub Pages in the repository Settings.
+    \item Access the published site at the provided URL: \texttt{your-username.github.io/your-repo-name}.
+\end{enumerate}
+
+\section{Summary}
+Week 2 extends HTML with structured data (tables), user input (forms/inputs/buttons), navigation content (lists, links, images), meaningful page structure (semantic tags), generic grouping containers (\texttt{div}/\texttt{span}), and the practical step of publishing a static site for free via GitHub Pages.
+
+\end{document}
