@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web Technologies 1 — Quizzes</title>
+<style>
+  :root {
+    --bg: #f7f7fb;
+    --card: #ffffff;
+    --ink: #1c1c28;
+    --muted: #6b6b7b;
+    --accent: #2457D6;
+    --border: #e3e3ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 32px 16px 60px;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .desc { color: var(--muted); margin-bottom: 24px; }
+  a.quiz-card {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    text-decoration: none;
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  a.quiz-card:hover { border-color: var(--accent); }
+  a.quiz-card .name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+  a.quiz-card .meta { color: var(--muted); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🌐 Web Technologies 1 — Quizzes</h1>
+  <p class="desc">Self-graded quizzes for each completed week. Open on GitHub Pages or locally in any browser.</p>
+
+  <a class="quiz-card" href="week1.html">
+    <div class="name">Week 1 — Introduction to Web Technologies</div>
+    <div class="meta">8 questions · Internet & WWW, client-server, basic HTML</div>
+  </a>
+
+  <a class="quiz-card" href="week2.html">
+    <div class="name">Week 2 — HTML Advanced</div>
+    <div class="meta">8 questions · Tables, forms, semantic tags, div/span, GitHub Pages</div>
+  </a>
+
+  <a class="quiz-card" href="week3.html">
+    <div class="name">Week 3 — CSS Fundamentals</div>
+    <div class="meta">10 questions · Selectors, specificity, box model, positioning</div>
+  </a>
+
+  <a class="quiz-card" href="week4.html">
+    <div class="name">Week 4 — CSS Layouts: Flexbox & Grid</div>
+    <div class="meta">10 questions · Flexbox & Grid terminology and properties</div>
+  </a>
+</div>
+</body>
+</html>
