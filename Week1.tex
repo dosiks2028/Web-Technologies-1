@@ -1,0 +1,152 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\geometry{margin=1in}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{teal}
+}
+
+\title{Web Technologies 1 (Frontend) \\ Week 1: Introduction to Web Technologies}
+\author{Dossymzhan}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+Week 1 introduces the course structure and grading, basic web-development tools, how the Internet and the World Wide Web work, the front-end/back-end split, and the very first HTML document.
+
+\section{1. Course Overview}
+A 10-week course covering HTML5, CSS3, Bootstrap, JavaScript and jQuery, along with website-building principles and basic web design. By the end you should be able to:
+\begin{itemize}
+    \item develop, validate and debug interactive websites using HTML, CSS, Bootstrap and JavaScript;
+    \item describe basic software-development tools and concepts: debugging, source code, validators;
+    \item deliver short, well-supported presentations and documents;
+    \item discuss that every problem has multiple solutions, each with trade-offs.
+\end{itemize}
+
+\subsection{Grading}
+\begin{itemize}
+    \item \textbf{1st attestation (100\%):} Assignment 1 HTML \& CSS Basics (15\%), Assignment 2 Advanced CSS: Flexbox \& Grid (15\%), Assignment 3 Responsive Web Design: Media Queries + Bootstrap Grid (15\%), Quiz 1 (15\%), Midterm Project (40\%).
+    \item \textbf{2nd attestation (100\%):} Assignment 4 Forms \& Validation (15\%), Assignment 5 JavaScript Basics/DOM (15\%), Assignment 6 jQuery (15\%), Quiz 2 (15\%), Endterm Project (40\%).
+    \item \textbf{Final exam:} Final Project, oral defense with presentation.
+    \item \textbf{Total:} $0.3 \times \text{1st Att} + 0.3 \times \text{2nd Att} + 0.4 \times \text{Final}$.
+    \item Attendance minimum 70\%; late work scores 0; automatic fail if Midterm/Endterm $< 25$; cheating/plagiarism scores 0.
+\end{itemize}
+
+\section{2. Web Development Tools}
+\begin{itemize}
+    \item \textbf{Visual Studio Code} — main code editor, strong extension support and built-in Git integration (Sublime Text is a lighter alternative).
+    \item \textbf{Browser Developer Tools} — inspect HTML/CSS, read console errors, test responsive behavior across screen sizes.
+    \item \textbf{Git and GitHub} — track project history, collaborate, and publish for free with GitHub Pages.
+\end{itemize}
+
+\section{3. Internet and WWW}
+\begin{itemize}
+    \item \textbf{Internet} — a global network of computers.
+    \item \textbf{World Wide Web (WWW)} — the collection of websites reachable over the Internet.
+    \item \textbf{Client–Server model:}
+    \begin{itemize}
+        \item \emph{Client} (browser) sends a request (e.g., HTTP) to a server.
+        \item \emph{Server} responds with the web page.
+        \item In between, data is split into packets that travel through ISPs and multiple routers before reaching the destination web server.
+    \end{itemize}
+\end{itemize}
+
+\section{4. Introduction to the Frontend}
+\begin{itemize}
+    \item \textbf{Front-end} — what the user sees; built with HTML and CSS.
+    \item \textbf{Back-end} — how the site works behind the scenes, on the server and database.
+    \item The browser renders whatever it receives:
+    \begin{itemize}
+        \item \textbf{HTML} determines how the page is \emph{structured}.
+        \item \textbf{CSS} controls presentation (how it \emph{looks}).
+        \item \textbf{JavaScript} controls behavior (how it \emph{functions}).
+    \end{itemize}
+\end{itemize}
+
+\section{5. What is HTML?}
+HTML (HyperText Markup Language) is the standard markup language for building web pages.
+\begin{itemize}
+    \item HTML defines the structure and layout of a page's content.
+    \item HTML consists of a series of \emph{elements}, represented by \emph{tags}.
+    \item Tags label content — \texttt{<h1>} marks a heading, \texttt{<p>} a paragraph, \texttt{<a>} a link, etc.
+    \item Browsers do not display the tags themselves; they use them to render the page.
+\end{itemize}
+
+\subsection{HTML Elements and Tags}
+An element is defined by a start tag, some content, and an end tag:
+\begin{lstlisting}[language=HTML]
+<tagname> Content goes here... </tagname>
+<h1> My First Heading </h1>
+\end{lstlisting}
+Tags are written inside \texttt{< >} and tell the browser what kind of content follows.
+
+\subsection{HTML Attributes}
+All HTML elements can have attributes, which provide additional information and are always specified in the start tag, usually as name/value pairs:
+\begin{lstlisting}[language=HTML]
+<tagname attribute="value"> Content </tagname>
+<a href="example.com"> Visit </a>
+\end{lstlisting}
+
+\section{6. The Basic HTML Structure}
+An HTML document is built from three container elements:
+\begin{lstlisting}[language=HTML]
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My First Webpage</title>
+  </head>
+  <body>
+    <h1>Hello, AITU!</h1>
+  </body>
+</html>
+\end{lstlisting}
+\begin{itemize}
+    \item \texttt{<html>} — the main container; everything belonging to the page goes inside it.
+    \item \texttt{<head>} — information for the browser (title, metadata, settings); not visible on the page.
+    \item \texttt{<body>} — the content actually displayed: text, images, links, and other elements.
+\end{itemize}
+
+\section{7. Headings and Paragraphs}
+\begin{lstlisting}[language=HTML]
+<h1>Page title</h1>
+<h2>Section titles</h2>
+<h3>Sub-sections</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<p>Paragraph text always starts on a new line.</p>
+\end{lstlisting}
+Headings (\texttt{<h1>}–\texttt{<h6>}) are titles/subtitles shown on the page, from most to least prominent. Paragraphs (\texttt{<p>}) always start on a new line and hold a block of text.
+
+\section{8. Breaks and Horizontal Rules}
+\begin{lstlisting}[language=HTML]
+<p>The 1st line <br> The 2nd line</p>
+<hr>
+<p>The 3rd line</p>
+\end{lstlisting}
+\begin{itemize}
+    \item \texttt{<br>} inserts a single line break.
+    \item \texttt{<hr>} defines a thematic change in the content (a horizontal rule).
+    \item Neither tag has a closing tag.
+\end{itemize}
+
+\section{Summary}
+Week 1 covers course logistics, essential tools (VS Code, DevTools, Git/GitHub), how the Internet/WWW/client-server model work, the HTML/CSS/JS division of responsibilities, and the basics of HTML: elements, tags, attributes, the \texttt{<html>/<head>/<body>} skeleton, headings, paragraphs, breaks and horizontal rules.
+
+\end{document}
