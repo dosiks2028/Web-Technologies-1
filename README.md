@@ -25,9 +25,6 @@ Personal lecture notes for a 10-week Web Technologies 1 (Frontend) course. Writt
 
 Practice/lab sessions follow the official course plan (basic HTML pages, forms & tables, CSS styling, Flexbox/Grid layouts, Bootstrap components, JS logic and DOM manipulation, jQuery, and a final interactive responsive website project). Notes for each week focus on the lecture topic; practice-session exercises are summarized where relevant.
 
-## 🧠 Quizzes
-
-Self-graded HTML quizzes for each completed week, in [`quizzes/`](quizzes/index.html). Open `quizzes/index.html` directly in a browser, or enable GitHub Pages to access them online at `dosiks2028.github.io/Web-Technologies-1/quizzes/`.
 
 ## ⚙️ Compiling
 
